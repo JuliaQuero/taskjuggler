@@ -161,12 +161,12 @@ task WMGame "Web & Mobile Game" {
 	task tintegrateMob "Integrate Mobile" {
 	  effort 15d
 	  allocate dev4, dev2
-	  depends WMGame.tmobileF.timplementMob,tdeploy.tdeployDep
+	  depends WMGame.tmobileF.timplementMob, WMGame.tdeploy.tdeployDep
 	}
 	task ttestMob "Test Mobile Application" {
 	  effort 10d
 	  allocate dev4, boss
-	  depends WMGame.tmobileF.tintegrateMob,tdeploy.tdeployDep
+	  depends WMGame.tmobileF.tintegrateMob, WMGame.tdeploy.tdeployDep
 	}
   }
 
