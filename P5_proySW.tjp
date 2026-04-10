@@ -2,7 +2,8 @@
  * This file contains the practice 5 source code corresponding with the 
  * project planification using TaskJuggler in the "Proyecto Software" course.
  * It is based on the Tutorial project offered by TaskJuggler and maintains 
- * some elements of it
+ * some elements of it 
+ * Julia Quero Pérez
  */
 
 project pSix "Web Game"  2025-12-15 +5m {
