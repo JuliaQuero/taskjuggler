@@ -129,13 +129,16 @@ task WMGame "Web & Mobile Game" {
   task tdeploy "Deployment" {
 	task tdecideDep "Decide cloud technology" {
 	  effort 2d
+	  allocate dev3
 	}
 	task ttestDep "Evaluate cloud technology" {
 	  effort 7d
+	  allocate dev3
 	  depends WMGame.tdeploy.tdeployDep
 	}
 	task tdeployDep "Deploy cloud" {
 	  effort 20d
+	  allocate dev3
 	  depends WMGame.tdeploy.tdecideDep
 	  journalentry 2026-04-10 "Admin Privileges" {
 		author dev3
