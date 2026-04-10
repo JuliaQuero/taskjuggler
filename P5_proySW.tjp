@@ -93,7 +93,7 @@ task WMGame "Web & Mobile Game" {
   task tgdesign "General System Design" {
       effort 2d
       allocate boss
-      depends WMGame.deliveries.start
+	  depends WMGame.deliveries.start
   }
 
   task tback "Back End" {
@@ -129,7 +129,6 @@ task WMGame "Web & Mobile Game" {
   task tdeploy "Deployment" {
 	task tdecideDep "Decide cloud technology" {
 	  effort 2d
-	  depends tdeploy.start
 	}
 	task ttestDep "Evaluate cloud technology" {
 	  effort 7d
