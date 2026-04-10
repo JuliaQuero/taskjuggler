@@ -19,7 +19,7 @@ project pSix "Web Game"  2025-12-15 +5m {
   # the project reports. If not specified, the current day will be
   # used, but this will likely be outside of the project range, so it
   # can't be seen in the reports.
-  now 2026-02-25-13:00
+  now 2026-04-10-17:00
   # The currency for all money values is the US Dollar.
   currency "EUR"
 
@@ -67,6 +67,10 @@ resource dev2 "Samantha Müller" {
 }
 resource dev3 "Peter Green" {
   email "kkk@unizar.es"
+}
+resource dev4 "Julia Quero Pérez" {
+  email "792310@unizar.es"
+  limits { dailymax 4h } # limitado el trabajo a 4h diaria
 }
 
 # Now we specify the work packages. The whole project is described as
@@ -118,6 +122,52 @@ task WMGame "Web & Mobile Game" {
       allocate dev1, dev2
       depends WMGame.tback.tlogic
     }
+	
+  }
+
+  task tdeploy "Deployment" {
+	task tdecideDep "Decide cloud technology" {
+	  effort 2d
+	  depends tdeploy.start
+	}
+	task ttestDep "Evaluate cloud technology" {
+	  effort 7d
+	  depends tdeploy.tdeployDep
+	}
+	task tdeployDep "Deploy cloud" {
+	  effort 20d
+	  depends tdeploy.tdecideDep
+	  journalentry 2026-04-10 "Admin Privileges" {
+		author dev3
+		alert yellow
+		summary -8<-
+			We need to revise the firewall set up by the
+			administrator to deploy the system.
+		->8-
+	  }
+	}
+  }
+
+  task tmobileF "Mobile Front End" {
+	task tdesignMob "Design of Mobile Front End" {
+	  effort 7d
+	  allocate dev4
+	}
+	task timplementMob "Implement Mobile Screens" {
+	  effort 20d
+	  allocate dev4, dev2
+	  depends tmobileF.tdesignMob
+	}
+	task tintegrateMob "Integrate Mobile" {
+	  effort 15d
+	  allocate dev4, dev2
+	  depends tmobileF.timplementMob,tdeploy.tdeployDep
+	}
+	task ttestMob "Test Mobile Application" {
+	  effort 10d
+	  allocate dev4, boss
+	  depends tmobileF.tintegrateMob,tdeploy.tdeployDep
+	}
   }
 
   task twebF "Web Front End" {
@@ -154,6 +204,7 @@ task WMGame "Web & Mobile Game" {
       actual:effort 20d
       depends WMGame.twebF
       depends WMGame.tback
+	  minstart 2026-05-15
       }
 
     
